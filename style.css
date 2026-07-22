@@ -1,0 +1,789 @@
+/* ---------------------------------------------------------
+   Dylans Lawncare
+   Design tokens live at the top so the rest of the sheet just
+   references them instead of hardcoding colors everywhere.
+--------------------------------------------------------- */
+
+:root {
+  --forest: #1F4D2C;
+  --forest-deep: #163A20;
+  --grass: #2F6B3C;
+  --grass-light: #4C8B52;
+  --lime: #A8D048;
+  --lime-deep: #8CB93B;
+  --cream: #F7F8F1;
+  --cream-dim: #EDF0E4;
+  --ink: #1B1F1A;
+  --ink-soft: #4A524A;
+  --line: rgba(27, 31, 26, 0.1);
+  --white: #FFFFFF;
+
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --max-width: 1180px;
+  --radius: 14px;
+  --shadow-soft: 0 18px 40px rgba(22, 58, 32, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 96px 32px;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lime);
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.eyebrow-dark {
+  color: var(--grass);
+}
+
+.section-lede {
+  max-width: 640px;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-top: 18px;
+}
+
+/* Buttons, shared across hero and contact form */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 28px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn-primary {
+  background: var(--lime);
+  color: var(--forest-deep);
+}
+
+.btn-primary:hover {
+  background: var(--lime-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------------------------------------------------------
+   Header / navigation
+--------------------------------------------------------- */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(22, 58, 32, 0.92);
+  backdrop-filter: blur(6px);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.site-header.scrolled {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  color: var(--white);
+}
+
+.brand-mark {
+  color: var(--lime);
+  display: flex;
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--white);
+}
+
+.brand-accent {
+  color: var(--lime);
+}
+
+.main-nav {
+  display: flex;
+  gap: 26px;
+}
+
+.main-nav a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.main-nav a:hover {
+  color: var(--lime);
+}
+
+.header-call {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+  color: var(--white);
+}
+
+.header-call-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.header-call-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--lime);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------
+   Hero
+--------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 36, 20, 0.55) 0%, rgba(15, 36, 20, 0.35) 45%, rgba(12, 30, 16, 0.92) 100%);
+}
+
+/* Diagonal mower stripe overlay across the hero image, this is the
+   recurring signature motif that ties every section together */
+.hero-stripes {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(31, 77, 44, 0.16) 0px,
+    rgba(31, 77, 44, 0.16) 60px,
+    transparent 60px,
+    transparent 120px
+  );
+  mix-blend-mode: multiply;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 140px 32px 72px;
+  color: var(--white);
+}
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 74px);
+  font-weight: 900;
+  max-width: 760px;
+}
+
+.hero-sub {
+  margin-top: 22px;
+  max-width: 540px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.hero-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trust-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--lime);
+}
+
+.trust-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 200px;
+}
+
+/* ---------------------------------------------------------
+   Mow stripe divider band, alternating tones of green like a
+   freshly cut lawn viewed from above
+--------------------------------------------------------- */
+
+.mow-divider {
+  height: 64px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--grass) 0px,
+    var(--grass) 80px,
+    var(--grass-light) 80px,
+    var(--grass-light) 160px
+  );
+}
+
+.mow-divider-flip {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--forest) 0px,
+    var(--forest) 80px,
+    var(--grass) 80px,
+    var(--grass) 160px
+  );
+}
+
+/* ---------------------------------------------------------
+   Services
+--------------------------------------------------------- */
+
+.services {
+  background: var(--cream);
+}
+
+.services h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  max-width: 680px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--cream-dim);
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.05);
+}
+
+.service-card h3 {
+  font-size: 19px;
+  padding: 20px 20px 0;
+}
+
+.service-card p {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  padding: 10px 20px 24px;
+}
+
+/* ---------------------------------------------------------
+   Work / before-after
+--------------------------------------------------------- */
+
+.work {
+  background: var(--forest-deep);
+  color: var(--white);
+}
+
+.work .eyebrow-dark {
+  color: var(--lime);
+}
+
+.work h2 {
+  color: var(--white);
+  font-size: clamp(28px, 4vw, 42px);
+  max-width: 680px;
+}
+
+.work .section-lede {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.before-after {
+  margin-top: 48px;
+  max-width: 720px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--forest);
+  box-shadow: var(--shadow-soft);
+}
+
+.before-after img {
+  width: 100%;
+}
+
+.before-after-caption {
+  padding: 18px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.before-after-caption p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------------------------------------------------------
+   About
+--------------------------------------------------------- */
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about-image img {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  width: 100%;
+}
+
+.about-copy h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 20px;
+}
+
+.about-copy p {
+  color: var(--ink-soft);
+  font-size: 16.5px;
+  margin-bottom: 16px;
+}
+
+.link-arrow {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--grass);
+  font-family: var(--font-display);
+}
+
+.link-arrow:hover {
+  color: var(--forest);
+}
+
+/* ---------------------------------------------------------
+   Service area
+--------------------------------------------------------- */
+
+.area {
+  background: var(--cream-dim);
+}
+
+.area h2 {
+  font-size: clamp(26px, 4vw, 38px);
+  margin-top: 4px;
+}
+
+.area-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.area-tags span {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--grass);
+}
+
+/* ---------------------------------------------------------
+   Contact
+--------------------------------------------------------- */
+
+.contact {
+  background: var(--forest);
+  color: var(--white);
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+}
+
+.contact h2 {
+  color: var(--white);
+  font-size: clamp(28px, 4vw, 40px);
+  margin-top: 4px;
+}
+
+.contact-copy p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 16.5px;
+  margin-top: 14px;
+}
+
+.contact-details {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-details li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.contact-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-details a {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lime);
+}
+
+.contact-form {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow-soft);
+  color: var(--ink);
+}
+
+.contact-form label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 14px;
+  color: var(--ink-soft);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--grass);
+  outline-offset: 1px;
+}
+
+.contact-form button {
+  margin-top: 24px;
+}
+
+.form-note {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
+   Footer
+--------------------------------------------------------- */
+
+.site-footer {
+  background: var(--forest-deep);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px 32px 32px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer-brand .brand-text {
+  font-size: 20px;
+}
+
+.footer-brand p {
+  margin-top: 12px;
+  font-size: 14px;
+  max-width: 260px;
+}
+
+.footer-links,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: var(--lime);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 32px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+--------------------------------------------------------- */
+
+@media (max-width: 980px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-inner,
+  .contact-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image {
+    order: -1;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header-call {
+    display: none;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 66px;
+    left: 0;
+    right: 0;
+    background: var(--forest-deep);
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 32px 20px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .main-nav.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .main-nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .section-inner {
+    padding: 72px 22px;
+  }
+
+  .hero-content {
+    padding: 120px 22px 56px;
+  }
+
+  .hero-trust-row {
+    gap: 28px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
